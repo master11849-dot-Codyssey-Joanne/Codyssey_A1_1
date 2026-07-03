@@ -83,10 +83,20 @@ def view_list():
     print_prompt_list(prompts)
     print(f"총 {len(prompts)}개의 프롬프트가 있습니다.")
 
+def view_by_category():
+    print("\n[ 카테고리별 조회 ]")
+    category = input("조회할 카테고리를 입력하세요: ")
+    filtered = [p for p in prompts if p['category'] == category]
+    
+    if not filtered:
+        print("해당 카테고리의 프롬프트가 없습니다.")
+    else:
+        print_prompt_list(filtered)
+
 def main():
     while True:
         show_menu()
-        choice = input("선택 메뉴 번호: ")
+        choice = input("선택 메뉴 번호를 입력하세요: ")
         
         if choice == '1':
             add_prompt()
