@@ -43,6 +43,26 @@ def main():
             sys.exit()
         else:
             print("\n❌ 오류: 잘못된 입력입니다. 0~5 사이의 번호를 선택해주세요.")
+            
+
+def add_prompt():
+    global next_id
+    print("\n[ 프롬프트 추가 ]")
+    title = input("제목을 입력하세요: ")
+    content = input("내용을 입력하세요: ")
+    category = input("카테고리를 입력하세요 (예: 주식, 채권, 디지털자산, 부동산, 원자재): ")
+    
+    new_prompt = {
+        "id": next_id,
+        "title": title,
+        "content": content,
+        "category": category,
+        "favorite": False
+    }
+    prompts.append(new_prompt)
+    print(f"\n✅ 성공: '{title}' 프롬프트가 추가되었습니다. (ID: {next_id})")
+    next_id += 1
+
 
 if __name__ == "__main__":
     main()
