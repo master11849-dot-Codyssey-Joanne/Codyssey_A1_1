@@ -93,6 +93,17 @@ def view_by_category():
     else:
         print_prompt_list(filtered)
 
+def search_prompt():
+    print("\n[ 프롬프트 검색 ]")
+    keyword = input("검색어를 입력하세요: ").lower()
+    filtered = [p for p in prompts if keyword in p['title'].lower() or keyword in p['content'].lower()]
+    
+    if not filtered:
+        print("검색 결과가 없습니다.")
+    else:
+        print("\n[ 검색 결과 ]")
+        print_prompt_list(filtered)
+        
 def main():
     while True:
         show_menu()
