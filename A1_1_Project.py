@@ -103,7 +103,36 @@ def search_prompt():
     else:
         print("\n[ 검색 결과 ]")
         print_prompt_list(filtered)
-        
+
+def view_details():
+    print("\n[ 상세 보기 ]")
+    try:
+        pid = int(input("조회할 프롬프트 ID를 입력하세요: "))
+    except ValueError:
+        print("❌ 오류: 숫자 형태의 ID를 입력해야 합니다.")
+        return
+
+    target = next((p for p in prompts if p['id'] == pid), None)
+    
+    if not target:
+        print("❌ 오류: 해당 ID의 프롬프트를 찾을 수 없습니다.")
+        return
+    
+    fav_icon = "★" if target['favorite'] else "☆"
+    print("\n========================================")
+    print(f"[ID: {target['id']}] {target['title']} (카테고리: {target['category']})")
+    print(f"즐겨찾기: {fav_icon}")
+    print("-" * 40)
+    print("[내용]")
+    print(target['content'])
+    print("========================================")
+    
+    toggle = input("\n이 프롬프트를 즐겨찾기에 추가/해제 하시겠습니까? (y/n): ").lower()
+    if toggle == 'y':
+        target['favorite'] = not target['favorite']
+        new_icon = "★" if target['favorite'] else "☆"
+        print(f"✅ 성공: 즐겨찾기 상태가 변경되었습니다. ({fav_icon} -> {new_icon})")
+
 def main():
     while True:
         show_menu()
